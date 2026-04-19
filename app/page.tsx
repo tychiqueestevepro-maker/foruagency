@@ -265,11 +265,18 @@ export default function Home() {
         {/* ── HERO ── */}
           <section className="relative min-h-screen flex flex-col items-center overflow-hidden bg-white">
             {/* Video */}
-            <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline 
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "saturate(1.5) contrast(1.15) brightness(1.02)" }}
+            >
               <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260302_085640_276ea93b-d7da-4418-a09b-2aa5b490e838.mp4" type="video/mp4" />
             </video>
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[26.416%] from-[rgba(255,255,255,0)] to-[66.943%] to-white pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white pointer-events-none" />
 
           {/* Content */}
           <div className="relative z-10 max-w-[1200px] mx-auto px-6 w-full flex flex-col items-center text-center pt-36 md:pt-[290px] pb-20 md:pb-28" style={{ gap: 28 }}>
