@@ -12,7 +12,7 @@ const SERVICES = [
 ];
 
 export default function Footer() {
-  const [year, setYear] = useState(new Date().getFullYear());
+  const [year, setYear] = useState<number | string>("");
   useEffect(() => { setYear(new Date().getFullYear()); }, []);
 
   return (

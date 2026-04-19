@@ -257,6 +257,44 @@ function ProcessStep({ step, index, activeStep, onInView }: { step: any, index: 
 
 export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    const playVideo = () => {
+      const video = document.getElementById("hero-video") as HTMLVideoElement;
+      if (video) {
+        video.muted = true;
+        video.play().catch((error) => {
+          console.warn("Autoplay deferred:", error.message);
+        });
+      }
+    };
+
+    // Try immediately after mount
+    setTimeout(playVideo, 100);
+
+    const handleInteraction = () => {
+      playVideo();
+      window.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("click", handleInteraction);
+    };
+
+    window.addEventListener("touchstart", handleInteraction, { passive: true });
+    window.addEventListener("click", handleInteraction, { passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("click", handleInteraction);
+    };
+  }, [mounted]);
+
   return (
     <>
       <Navbar />
@@ -268,22 +306,37 @@ export default function Home() {
             <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-400/15 blur-[120px] rounded-full pointer-events-none" />
             <div className="absolute top-[5%] right-[-10%] w-[600px] h-[600px] bg-purple-400/15 blur-[140px] rounded-full pointer-events-none" />
 
-            {/* Video */}
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              className="absolute inset-0 w-full h-full object-cover"
+            {/* Video - Using client-only dangerouslySetInnerHTML for maximum iOS compatibility & zero hydration errors */}
+            <div 
+              className="absolute inset-0 w-full h-full" 
               style={{ filter: "saturate(1.5) contrast(1.15) brightness(1.02)" }}
             >
-              <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260302_085640_276ea93b-d7da-4418-a09b-2aa5b490e838.mp4" type="video/mp4" />
-            </video>
+              {mounted && (
+                <div 
+                  className="w-full h-full"
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                      <video
+                        id="hero-video"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="auto"
+                        class="w-full h-full object-cover"
+                      >
+                        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260302_085640_276ea93b-d7da-4418-a09b-2aa5b490e838.mp4" type="video/mp4" />
+                      </video>
+                    `
+                  }}
+                />
+              )}
+            </div>
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white pointer-events-none" />
 
           {/* Content */}
-          <div className="relative z-10 max-w-[1200px] mx-auto px-6 w-full flex flex-col items-center text-center pt-36 md:pt-[290px] pb-20 md:pb-28" style={{ gap: 28 }}>
+          <div className="relative z-10 max-w-[1200px] mx-auto px-6 w-full flex flex-col items-center text-center pt-36 md:pt-[290px] pb-20 md:pb-28" style={{ gap: "28px" }}>
 
 
             {/* Heading */}
@@ -327,37 +380,37 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Social proof */}
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-100 shadow-sm relative" style={{ zIndex: 10 - i }}>
-                    <img 
-                      src={`https://i.pravatar.cc/100?u=${i + 10}`} 
-                      alt="Client" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+          {/* Social proof */}
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-3">
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-100 shadow-sm relative" style={{ zIndex: 10 - i }}>
+                  <img 
+                    src={`https://i.pravatar.cc/100?u=${i + 10}`} 
+                    alt="Client" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            <Link 
+              href="https://fr.trustpilot.com/review/foruagency.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2 group transition-all"
+            >
+              <div className="flex">
+                {[1,2,3,4,5].map((i) => (
+                  <span key={i} className="text-xs sm:text-sm leading-none" style={{ color: "#F97316" }}>★</span>
                 ))}
               </div>
-              <Link 
-                href="https://fr.trustpilot.com/review/foruagency.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 group transition-all"
-              >
-                <div className="flex">
-                  {[1,2,3,4,5].map((i) => (
-                    <span key={i} className="text-sm leading-none" style={{ color: "#F97316" }}>★</span>
-                  ))}
-                </div>
-                <span className="font-body text-sm font-medium transition-colors group-hover:opacity-80" style={{ color: "rgba(55,58,70,0.65)" }}>
-                  Retrouvez l'avis de nos clients sur <span className="font-semibold text-[#00b67a]">Trustpilot</span>
-                </span>
-              </Link>
-            </div>
+              <span className="font-body text-[13px] sm:text-sm font-medium transition-colors group-hover:opacity-80 text-center sm:text-left" style={{ color: "rgba(55,58,70,0.65)" }}>
+                L&apos;avis de nos clients sur <span className="font-semibold text-[#00b67a]">Trustpilot</span>
+              </span>
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
 
 
 
