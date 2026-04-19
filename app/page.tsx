@@ -329,15 +329,32 @@ export default function Home() {
 
             {/* Social proof */}
             <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {["#3B82F6", "#8B5CF6", "#EC4899", "#F97316", "#0A0A0A"].map((c) => (
-                  <div key={c} className="w-7 h-7 rounded-full border-2 border-white" style={{ backgroundColor: c }} />
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-100 shadow-sm relative" style={{ zIndex: 10 - i }}>
+                    <img 
+                      src={`https://i.pravatar.cc/100?u=${i + 10}`} 
+                      alt="Client" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 ))}
               </div>
-              <div className="flex items-center gap-2">
-                <div className="flex">{[1,2,3,4,5].map((i) => <span key={i} className="text-sm leading-none" style={{ color: "#F97316" }}>★</span>)}</div>
-                <span className="font-body text-sm font-medium" style={{ color: "rgba(55,58,70,0.65)" }}>50+ projets livrés</span>
-              </div>
+              <Link 
+                href="https://fr.trustpilot.com/review/foruagency.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 group transition-all"
+              >
+                <div className="flex">
+                  {[1,2,3,4,5].map((i) => (
+                    <span key={i} className="text-sm leading-none" style={{ color: "#F97316" }}>★</span>
+                  ))}
+                </div>
+                <span className="font-body text-sm font-medium transition-colors group-hover:opacity-80" style={{ color: "rgba(55,58,70,0.65)" }}>
+                  Retrouvez l'avis de nos clients sur <span className="font-semibold text-[#00b67a]">Trustpilot</span>
+                </span>
+              </Link>
             </div>
           </div>
         </section>
