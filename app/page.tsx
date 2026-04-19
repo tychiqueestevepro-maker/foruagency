@@ -264,6 +264,10 @@ export default function Home() {
 
         {/* ── HERO ── */}
           <section className="relative min-h-screen flex flex-col items-center overflow-hidden bg-white">
+            {/* Background Blobs for Top Balance */}
+            <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-400/15 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute top-[5%] right-[-10%] w-[600px] h-[600px] bg-purple-400/15 blur-[140px] rounded-full pointer-events-none" />
+
             {/* Video */}
             <video 
               autoPlay 
@@ -276,7 +280,7 @@ export default function Home() {
               <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260302_085640_276ea93b-d7da-4418-a09b-2aa5b490e838.mp4" type="video/mp4" />
             </video>
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white pointer-events-none" />
 
           {/* Content */}
           <div className="relative z-10 max-w-[1200px] mx-auto px-6 w-full flex flex-col items-center text-center pt-36 md:pt-[290px] pb-20 md:pb-28" style={{ gap: 28 }}>
