@@ -1,0 +1,6 @@
+.DS_Store
+.claude/
+Inspiration/
+foruagency-site/node_modules/
+foruagency-site/.next/
+foruagency-site/.env*
