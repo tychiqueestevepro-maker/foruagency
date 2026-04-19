@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+const BASE_URL = "https://foruagency.com";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/mentions-legales", "/politique-confidentialite"],
     },
-    sitemap: "https://foruagency.com/sitemap.xml",
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }
