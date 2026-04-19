@@ -92,12 +92,12 @@ export default function CalendlyWidget() {
             className="bg-white rounded-[2rem] shadow-[0_30px_80px_rgba(0,0,0,0.18)] border border-black/5 w-72 md:w-80 overflow-hidden mb-2"
           >
             {/* Header Profile */}
-            <div className="bg-[#0A0A0A] p-6 text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#3B82F6] opacity-10 blur-[40px] pointer-events-none" />
+            <div className="bg-white p-6 text-[#0A0A0A] relative overflow-hidden border-b border-black/5">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#3B82F6] opacity-5 blur-[40px] pointer-events-none" />
               
               <button 
                 onClick={handleClose}
-                className="absolute top-4 right-4 text-white/30 hover:text-white transition-colors"
+                className="absolute top-4 right-4 text-black/20 hover:text-black transition-colors"
               >
                 <X size={20} />
               </button>
@@ -108,16 +108,16 @@ export default function CalendlyWidget() {
                   style={{ background: "linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899)" }}
                 >
                   T
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-[#0A0A0A]" />
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg leading-tight">Tychique Esteve</h3>
-                  <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">Fondateur</p>
+                  <h3 className="font-bold text-lg leading-tight text-[#0A0A0A]">Tychique Esteve</h3>
+                  <p className="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest font-bold">Fondateur</p>
                 </div>
               </div>
               
-              <p className="text-white/70 text-sm leading-relaxed relative z-10">
-                👋 Bonjour ! Un projet web ou besoin d&apos;automatiser vos outils ? On en discute de vive voix ?
+              <p className="text-[#0A0A0A]/70 text-sm leading-relaxed relative z-10 font-medium">
+                👋 Bonjour ! Un projet web ou besoin d&apos;automatiser vos outils ? On en discute ensemble ?
               </p>
             </div>
 
